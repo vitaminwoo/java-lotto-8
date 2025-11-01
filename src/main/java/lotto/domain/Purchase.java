@@ -1,0 +1,24 @@
+package lotto.domain;
+
+public class Purchase {
+    private final int LOTTO_PRICE = 1000;
+    private int purchasePrice;
+    private int purchaseAmount;
+
+    public Purchase(int purchasePriceInput) {
+        this.purchasePrice = purchasePriceInput;
+        this.purchaseAmount = calculatePurchaseAmount(purchasePriceInput);
+    }
+
+    private void validate(int purchasePrice) {
+        if (purchasePrice % LOTTO_PRICE != 0) {
+            throw new IllegalArgumentException("[ERROR] 로또 구입 금액은 1,000원 단위여야 합니다");
+        }
+    }
+
+    private int calculatePurchaseAmount(int purchasePrice) {
+        validate(purchasePrice);
+        return purchasePrice / LOTTO_PRICE;
+    }
+
+}
