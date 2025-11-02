@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.Lottos;
 import lotto.domain.Purchase;
 import lotto.util.InputConverter;
 import lotto.view.InputView;
@@ -17,6 +18,7 @@ public class LottoController {
 
     public void run() {
         Purchase purchase = createPurchase();
+        Lottos purchaseLottos = createLottos(purchase.getPurchaseAmount());
     }
 
     private Purchase createPurchase() {
@@ -24,5 +26,12 @@ public class LottoController {
         return new Purchase(purchasePrice);
     }
 
-//    private
+    private Lottos createLottos(int purchaseAmount) {
+        outputView.printPurchaseAmount(purchaseAmount);
+        Lottos randomLottos = Lottos.generateRandomLottos(purchaseAmount);
+        outputView.printRandomLottos(randomLottos);
+        return randomLottos;
+    }
+
+
 }
