@@ -2,8 +2,8 @@ package lotto.domain;
 
 public class Purchase {
     private final int LOTTO_PRICE = 1000;
-    private int purchasePrice;
-    private int purchaseAmount;
+    private final int purchasePrice;
+    private final int purchaseAmount;
 
     public Purchase(int purchasePriceInput) {
         this.purchasePrice = purchasePriceInput;
@@ -19,6 +19,14 @@ public class Purchase {
     private int calculatePurchaseAmount(int purchasePrice) {
         validate(purchasePrice);
         return purchasePrice / LOTTO_PRICE;
+    }
+
+    public int getPurchasePrice() {
+        return purchasePrice;
+    }
+
+    public int getPurchaseAmount() {
+        return purchaseAmount;
     }
 
 }
