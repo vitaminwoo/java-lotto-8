@@ -24,15 +24,13 @@ public class Lottos {
         return lottos;
     }
 
-/*
-    private List<Lotto> generateRandomLottos2(int amount) {
-        List<Lotto> randomLottos = new ArrayList<>();
-        for (int i = 0; i < amount; i++) {
-            Lotto randomLotto = Lotto.createRandomLotto();
-            randomLottos.add(randomLotto);
+    public WinnerResult calculateWinningLottosResult(WinningLotto winningLotto) {
+        List<Winner> winnerResult = new ArrayList<>();
+        for (Lotto lotto : lottos) {
+            Winner winner = lotto.matchWinningLotto(winningLotto);
+            winnerResult.add(winner);
         }
-        return randomLottos;
-    }*/
-
+        return new WinnerResult(winnerResult);
+    }
 
 }
