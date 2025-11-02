@@ -37,6 +37,27 @@ public class Lotto {
         return new Lotto(randomNumbers);
     }
 
+    public Winner matchWinningLotto(WinningLotto winningLotto) {
+        int matchCount = checkWinningLottoNumbers(winningLotto.getWinningLotto());
+        boolean bonusCheck = checkWinningLottoBonusNumber(winningLotto.getWinningBonusNumber());
+
+        return Winner.findWinnerRank(matchCount, bonusCheck);
+    }
+
+    public int checkWinningLottoNumbers(Lotto winningLottoNumbers) {
+        int count = 0;
+        for (int winningNumber : winningLottoNumbers.getNumbers()) {
+            if (this.numbers.contains(winningNumber)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public boolean checkWinningLottoBonusNumber(int winningLottoBonusNumber) {
+        return this.numbers.contains(winningLottoBonusNumber);
+    }
+
     public List<Integer> getNumbers() {
         return numbers;
     }
