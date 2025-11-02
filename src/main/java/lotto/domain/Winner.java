@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import java.util.List;
-
 public enum Winner {
     FIRST(6, 2_000_000_000) {
         public boolean isMatch(int matchCount, boolean bonusCheck) {

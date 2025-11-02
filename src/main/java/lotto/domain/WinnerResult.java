@@ -10,8 +10,14 @@ public class WinnerResult {
         this.winnerResult = winnerResult;
     }
 
-    public List<Winner> getWinnerResult() {
-        return winnerResult;
+    public int getCountOfRank(Winner rank) {
+        int count = 0;
+        for (Winner winner : winnerResult) {
+            if (winner == rank) {
+                count++;
+            }
+        }
+        return count;
     }
 
     public String calculateEarnRate(int purchasePrice){

@@ -1,15 +1,12 @@
 package lotto;
 
-import lotto.domain.Lottos;
-import lotto.domain.Purchase;
-import lotto.domain.WinningLotto;
+import lotto.domain.*;
 import lotto.util.InputConverter;
 import lotto.util.Parser;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoController {
 
@@ -25,7 +22,11 @@ public class LottoController {
         Purchase purchase = createPurchase();
         Lottos purchaseLottos = createLottos(purchase.getPurchaseAmount());
         WinningLotto winningLotto = createWinningLotto();
+
+        WinnerResult winnerResult = createWinnerResult(purchaseLottos, winningLotto);
+        printWinnerResult(winnerResult, purchase.getPurchasePrice());
     }
+
 
     private Purchase createPurchase() {
         int purchasePriceInput = InputConverter.convertInput(inputView.readPurchasePrice());
@@ -49,4 +50,12 @@ public class LottoController {
         return WinningLotto.generateWinningLotto(winningNumbersInput, winningBonusNumberInput);
     }
 
+    private WinnerResult createWinnerResult(Lottos purchaseLottos, WinningLotto winningLotto) {
+        return purchaseLottos.calculateWinningLottosResult(winningLotto);
+    }
+
+    private void printWinnerResult(WinnerResult winnerResult, int purchasePrice) {
+        outputView.printWinningResult(winnerResult);
+        outputView.printIncomeRate(winnerResult, purchasePrice);
+    }
 }
