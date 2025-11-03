@@ -3,6 +3,10 @@ package lotto.util;
 public class InputConverter {
 
     public static int convertInput(String input) {
+        if (input == null || input.isBlank()) {
+            throw new IllegalArgumentException("[ERROR] 입력 값이 없습니다.");
+        }
+
         int numberInput;
         try {
             numberInput = Integer.parseInt(input);
