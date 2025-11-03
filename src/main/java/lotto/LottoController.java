@@ -29,8 +29,14 @@ public class LottoController {
 
 
     private Purchase createPurchase() {
-        int purchasePriceInput = InputConverter.convertInput(inputView.readPurchasePrice());
-        return new Purchase(purchasePriceInput);
+        while (true) {
+            try {
+                int purchasePriceInput = InputConverter.convertInput(inputView.readPurchasePrice());
+                return new Purchase(purchasePriceInput);
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     private Lottos createLottos(int purchaseAmount) {
@@ -42,12 +48,18 @@ public class LottoController {
     }
 
     private WinningLotto createWinningLotto() {
-        List<Integer> winningNumbersInput = Parser.splitInput(inputView.readWinningNumber()).stream()
-                .map(InputConverter::convertInput)
-                .toList();
-        int winningBonusNumberInput = InputConverter.convertInput(inputView.readWinningBonusNumber());
+        while (true) {
+            try {
+                List<Integer> winningNumbersInput = Parser.splitInput(inputView.readWinningNumber()).stream()
+                        .map(InputConverter::convertInput)
+                        .toList();
 
-        return WinningLotto.generateWinningLotto(winningNumbersInput, winningBonusNumberInput);
+                int winningBonusNumberInput = InputConverter.convertInput(inputView.readWinningBonusNumber());
+                return WinningLotto.generateWinningLotto(winningNumbersInput, winningBonusNumberInput);
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage()); // 에러 메시지 출력 후 다시 while의 처음으로
+            }
+        }
     }
 
     private WinnerResult createWinnerResult(Lottos purchaseLottos, WinningLotto winningLotto) {

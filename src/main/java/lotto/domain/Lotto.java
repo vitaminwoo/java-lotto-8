@@ -2,6 +2,7 @@ package lotto.domain;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Stream;
@@ -14,12 +15,14 @@ public class Lotto {
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
-        validateSize(numbers);
-        validateDuplicate(numbers);
-        for (int number : numbers) {
+        List<Integer> numbersCopy = new ArrayList<>(numbers);
+        numbersCopy.sort(null);
+        validateSize(numbersCopy);
+        validateDuplicate(numbersCopy);
+        for (int number : numbersCopy) {
             validateNumber(number);
         }
-        this.numbers = numbers;
+        this.numbers = numbersCopy;
     }
 
     public static void validateNumber(int number) {
