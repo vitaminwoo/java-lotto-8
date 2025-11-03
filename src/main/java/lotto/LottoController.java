@@ -57,7 +57,7 @@ public class LottoController {
                 int winningBonusNumberInput = InputConverter.convertInput(inputView.readWinningBonusNumber());
                 return WinningLotto.generateWinningLotto(winningNumbersInput, winningBonusNumberInput);
             } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage()); // 에러 메시지 출력 후 다시 while의 처음으로
+                System.out.println(e.getMessage());
             }
         }
     }
