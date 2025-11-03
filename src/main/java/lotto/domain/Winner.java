@@ -1,19 +1,9 @@
 package lotto.domain;
 
 public enum Winner {
-    FIRST(6, 2_000_000_000) {
+    FIFTH(3, 5_000) {
         public boolean isMatch(int matchCount, boolean bonusCheck) {
-            return matchCount == 6;
-        }
-    },
-    SECOND(5, 30_000_000) {
-        public boolean isMatch(int matchCount, boolean bonusCheck) {
-            return matchCount == 5 && bonusCheck;
-        }
-    },
-    THIRD(5, 1_500_000) {
-        public boolean isMatch(int matchCount, boolean bonusCheck) {
-            return matchCount == 5 && !bonusCheck;
+            return matchCount == 3;
         }
     },
     FORTH(4, 50_000) {
@@ -21,9 +11,19 @@ public enum Winner {
             return matchCount == 4;
         }
     },
-    FIFTH(3, 5_000) {
+    THIRD(5, 1_500_000) {
         public boolean isMatch(int matchCount, boolean bonusCheck) {
-            return matchCount == 3;
+            return matchCount == 5 && !bonusCheck;
+        }
+    },
+    SECOND(5, 30_000_000) {
+        public boolean isMatch(int matchCount, boolean bonusCheck) {
+            return matchCount == 5 && bonusCheck;
+        }
+    },
+    FIRST(6, 2_000_000_000) {
+        public boolean isMatch(int matchCount, boolean bonusCheck) {
+            return matchCount == 6;
         }
     },
     LOSE(0, 0) {

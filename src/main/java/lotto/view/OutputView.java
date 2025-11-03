@@ -9,7 +9,7 @@ import java.util.*;
 
 public class OutputView {
     private static final String MESSAGE_PURCHASE_AMOUNT = "개를 구매했습니다.";
-    private static final String MESSAGE_WINNING_RESULT = "\n당첨 통계\n---";
+    private static final String MESSAGE_WINNING_RESULT = "당첨 통계\n---";
     private static final String MESSAGE_INCOME_RATE_FRONT = "총 수익률은 ";
     private static final String MESSAGE_INCOME_RATE_BACK = "%입니다.";
 
@@ -30,8 +30,7 @@ public class OutputView {
         System.out.println(MESSAGE_WINNING_RESULT);
         List<Winner> winnerResultOutput = new ArrayList<>(Arrays.asList(Winner.values()));
         winnerResultOutput.remove(Winner.LOSE);
-        Collections.reverse(winnerResultOutput);
-
+        
         for (Winner winner : winnerResultOutput) {
             int winnerCount = winnerResult.getCountOfRank(winner);
             String msgMatchCount = matchCountStringConstructor(winner);
