@@ -4,27 +4,37 @@ import camp.nextstep.edu.missionutils.Randoms;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class Lotto {
-    private static final int RANDOM_NUMBER_MIN = 1;
-    private static final int RANDOM_NUMBER_MAX = 45;
-    private static final int RANDOM_NUMBER_COUNT = 6;
+    private static final int LOTTO_NUMBER_MIN = 1;
+    private static final int LOTTO_NUMBER_MAX = 45;
+    private static final int LOTTO_NUMBER_SIZE = 6;
 
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
-        validate(numbers);
+        validateSize(numbers);
         validateDuplicate(numbers);
+        for (int number : numbers) {
+            validateNumber(number);
+        }
         this.numbers = numbers;
     }
 
-    private void validate(List<Integer> numbers) {
-        if (numbers.size() != 6) {
+    public static void validateNumber(int number) {
+        if (number < LOTTO_NUMBER_MIN || number > LOTTO_NUMBER_MAX) {
+            throw new IllegalArgumentException("[ERROR] 로또 번호는 1 ~ 45 사이의 숫자여야 합니다.");
+        }
+    }
+
+    private void validateSize(List<Integer> numbers) {
+        if (numbers.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException("[ERROR] 로또 번호는 6개여야 합니다.");
         }
     }
 
-    private void validateDuplicate(List<Integer> numbers) {
+    public static void validateDuplicate(List<Integer> numbers) {
         if (numbers.size() != new HashSet<>(numbers).size()) {
             throw new IllegalArgumentException("[ERROR] 로또 번호는 서로 다른 숫자여야 합니다.");
         }
@@ -32,7 +42,7 @@ public class Lotto {
 
     public static Lotto createRandomLotto() {
         List<Integer> randomNumbers = Randoms.pickUniqueNumbersInRange(
-                RANDOM_NUMBER_MIN, RANDOM_NUMBER_MAX, RANDOM_NUMBER_COUNT
+                LOTTO_NUMBER_MIN, LOTTO_NUMBER_MAX, LOTTO_NUMBER_SIZE
         );
         return new Lotto(randomNumbers);
     }
@@ -61,5 +71,4 @@ public class Lotto {
     public List<Integer> getNumbers() {
         return numbers;
     }
-    // TODO: 추가 기능 구현
 }

@@ -3,8 +3,19 @@ package lotto.util;
 public class InputConverter {
 
     public static int convertInput(String input) {
-        return Integer.parseInt(input);
+        int numberInput;
+        try {
+            numberInput = Integer.parseInt(input);
+            validate(numberInput);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("[ERROR] 입력한 값이 숫자가 아닙니다");
+        }
+        return numberInput;
     }
 
-    // TODO : validate, 예외처리 코드 필요.
+    private static void validate(int input) {
+        if (input <= 0) {
+            throw new IllegalArgumentException("[ERROR] 양수 값을 입력해야 합니다");
+        }
+    }
 }

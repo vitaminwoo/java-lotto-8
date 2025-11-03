@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class WinningLotto {
@@ -8,7 +9,17 @@ public class WinningLotto {
 
     public WinningLotto(Lotto winningLotto, int winningBonusNumber) {
         this.winningLotto = winningLotto;
+
+        validateBonusNumber(winningLotto, winningBonusNumber);
         this.winningBonusNumber = winningBonusNumber;
+    }
+
+    private void validateBonusNumber(Lotto lotto, int bonusNumber) {
+        Lotto.validateNumber(bonusNumber);
+
+        List<Integer> lottoNumbers =new ArrayList<>(lotto.getNumbers());
+        lottoNumbers.add(bonusNumber);
+        Lotto.validateDuplicate(lottoNumbers);
     }
 
     public Lotto getWinningLotto() {
