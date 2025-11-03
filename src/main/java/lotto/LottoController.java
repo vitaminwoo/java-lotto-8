@@ -6,6 +6,7 @@ import lotto.util.Parser;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoController {
@@ -48,19 +49,46 @@ public class LottoController {
     }
 
     private WinningLotto createWinningLotto() {
+        Lotto winningLotto = validateWinningLottoInput();
+        int winningBonusNumber = validateWinningBonusNumberInput(winningLotto);
+
+        return new WinningLotto(winningLotto, winningBonusNumber);
+    }
+
+    private Lotto validateWinningLottoInput() {
         while (true) {
             try {
                 List<Integer> winningNumbersInput = Parser.splitInput(inputView.readWinningNumber()).stream()
                         .map(InputConverter::convertInput)
                         .toList();
-                Lotto winningLottoNumbers = new Lotto(winningNumbersInput);
+                return new Lotto(winningNumbersInput);
 
-                int winningBonusNumberInput = InputConverter.convertInput(inputView.readWinningBonusNumber());
-                return new WinningLotto(winningLottoNumbers, winningBonusNumberInput);
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
         }
+    }
+
+    private int validateWinningBonusNumberInput(Lotto winningLotto) {
+        while (true) {
+            try {
+                int winningBonusNumberInput = InputConverter.convertInput(inputView.readWinningBonusNumber());
+                validateWinningBonusNumber(winningLotto, winningBonusNumberInput);
+
+                return winningBonusNumberInput;
+
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    private void validateWinningBonusNumber(Lotto winningLotto, int bonusNumber) {
+        Lotto.validateNumber(bonusNumber);
+
+        List<Integer> lottoNumbers = new ArrayList<>(winningLotto.getNumbers());
+        lottoNumbers.add(bonusNumber);
+        Lotto.validateDuplicate(lottoNumbers);
     }
 
     private WinnerResult createWinnerResult(Lottos purchaseLottos, WinningLotto winningLotto) {
@@ -71,4 +99,5 @@ public class LottoController {
         outputView.printWinningResult(winnerResult);
         outputView.printIncomeRate(winnerResult, purchasePrice);
     }
+
 }
