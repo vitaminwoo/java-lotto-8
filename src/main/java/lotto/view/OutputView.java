@@ -60,7 +60,7 @@ public class OutputView {
 
     public void printIncomeRate(WinnerResult winnerResult, int purchasePrice) {
         String earnRateOutput = winnerResult.calculateEarnRate(purchasePrice);
-        System.out.print(MESSAGE_INCOME_RATE_FRONT + earnRateOutput + MESSAGE_INCOME_RATE_BACK);
+        System.out.println(MESSAGE_INCOME_RATE_FRONT + earnRateOutput + MESSAGE_INCOME_RATE_BACK);
     }
 
 }
