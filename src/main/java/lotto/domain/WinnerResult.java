@@ -25,6 +25,10 @@ public class WinnerResult {
         for (Winner winner : winnerResult) {
             earnSum += winner.getWinnerPrice();
         }
-        return String.format("%.1f", (double) earnSum /  purchasePrice * 100);
+
+        double incomeRate = (double) earnSum / purchasePrice * 100;
+        double roundedRate = Math.round(incomeRate * 10.0) / 10.0;
+
+        return String.format("%.1f", roundedRate);
     }
 }
