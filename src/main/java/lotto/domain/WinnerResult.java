@@ -27,7 +27,8 @@ public class WinnerResult {
         }
 
         double incomeRate = ((double) earnSum / purchasePrice ) * 100;
+        double roundedRate = Math.round(incomeRate * 100) / 100f;
 
-        return String.format("%.1f", incomeRate);
+        return String.format("%.1f", roundedRate);
     }
 }
