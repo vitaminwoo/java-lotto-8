@@ -8,10 +8,13 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class Lotto {
+    private static final int LOTTO_NUMBER_MIN = 1;
+    private static final int LOTTO_NUMBER_MAX = 45;
+    private static final int LOTTO_NUMBER_SIZE = 6;
+
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
-        validate(numbers);
         List<Integer> numbersCopy = new ArrayList<>(numbers);
         numbersCopy.sort(null);
         validate(numbersCopy);
@@ -23,7 +26,7 @@ public class Lotto {
     }
 
     public static void validateNumber(int number) {
-        if (number < 1 || number > 45) {
+        if (number < LOTTO_NUMBER_MIN || number > LOTTO_NUMBER_MAX) {
             throw new IllegalArgumentException("[ERROR] 로또 번호는 1 ~ 45 사이의 숫자여야 합니다.");
         }
     }
@@ -42,7 +45,7 @@ public class Lotto {
 
     public static Lotto createRandomLotto() {
         List<Integer> randomNumbers = Randoms.pickUniqueNumbersInRange(
-                1, 45, 6
+                LOTTO_NUMBER_MIN, LOTTO_NUMBER_MAX, LOTTO_NUMBER_SIZE
         );
         return new Lotto(randomNumbers);
     }
