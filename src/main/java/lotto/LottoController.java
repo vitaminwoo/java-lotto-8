@@ -53,9 +53,10 @@ public class LottoController {
                 List<Integer> winningNumbersInput = Parser.splitInput(inputView.readWinningNumber()).stream()
                         .map(InputConverter::convertInput)
                         .toList();
+                Lotto winningLottoNumbers = new Lotto(winningNumbersInput);
 
                 int winningBonusNumberInput = InputConverter.convertInput(inputView.readWinningBonusNumber());
-                return WinningLotto.generateWinningLotto(winningNumbersInput, winningBonusNumberInput);
+                return new WinningLotto(winningLottoNumbers, winningBonusNumberInput);
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }

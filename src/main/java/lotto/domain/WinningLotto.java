@@ -30,8 +30,4 @@ public class WinningLotto {
         return winningBonusNumber;
     }
 
-    public static WinningLotto generateWinningLotto(List<Integer> winningNumbers, int winningBonusNumber) {
-        Lotto winningLottoInput = new Lotto(winningNumbers);
-        return new WinningLotto(winningLottoInput, winningBonusNumber);
-    }
 }
